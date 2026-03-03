@@ -1,0 +1,14 @@
+F:\University\Third_course\Parrallel whatever\lab1\c#\ThreadDemo\bin\Debug\net10.0\ThreadDemo.exe
+F:\University\Third_course\Parrallel whatever\lab1\c#\ThreadDemo\bin\Debug\net10.0\ThreadDemo.deps.json
+F:\University\Third_course\Parrallel whatever\lab1\c#\ThreadDemo\bin\Debug\net10.0\ThreadDemo.runtimeconfig.json
+F:\University\Third_course\Parrallel whatever\lab1\c#\ThreadDemo\bin\Debug\net10.0\ThreadDemo.dll
+F:\University\Third_course\Parrallel whatever\lab1\c#\ThreadDemo\bin\Debug\net10.0\ThreadDemo.pdb
+F:\University\Third_course\Parrallel whatever\lab1\c#\ThreadDemo\obj\Debug\net10.0\ThreadDemo.GeneratedMSBuildEditorConfig.editorconfig
+F:\University\Third_course\Parrallel whatever\lab1\c#\ThreadDemo\obj\Debug\net10.0\ThreadDemo.AssemblyInfoInputs.cache
+F:\University\Third_course\Parrallel whatever\lab1\c#\ThreadDemo\obj\Debug\net10.0\ThreadDemo.AssemblyInfo.cs
+F:\University\Third_course\Parrallel whatever\lab1\c#\ThreadDemo\obj\Debug\net10.0\ThreadDemo.csproj.CoreCompileInputs.cache
+F:\University\Third_course\Parrallel whatever\lab1\c#\ThreadDemo\obj\Debug\net10.0\ThreadDemo.dll
+F:\University\Third_course\Parrallel whatever\lab1\c#\ThreadDemo\obj\Debug\net10.0\refint\ThreadDemo.dll
+F:\University\Third_course\Parrallel whatever\lab1\c#\ThreadDemo\obj\Debug\net10.0\ThreadDemo.pdb
+F:\University\Third_course\Parrallel whatever\lab1\c#\ThreadDemo\obj\Debug\net10.0\ThreadDemo.genruntimeconfig.cache
+F:\University\Third_course\Parrallel whatever\lab1\c#\ThreadDemo\obj\Debug\net10.0\ref\ThreadDemo.dll
