@@ -1,74 +1,74 @@
 package Lab1.Java;
+
+import java.util.*;
+
 public class Main {
+    static final int NUM_THREADS = 10;
+    static final int STEP_BASE = 5;
 
-    static final int  NUM_THREADS = 10;
-    static final int  STEP_BASE   = 5;
-    static final long TIME_MS     = 1000;
-
-    static class WorkerThread extends Thread {
-        private final int id;
+    static class WorkerThread {
+        public final int id;
         private final int step;
         private volatile boolean running = true;
-        private long sum   = 0;
+        private long sum = 0;
         private long count = 0;
+        public final Thread thread;
 
-        WorkerThread(int id, int step) {
-            this.id   = id;
+        public WorkerThread(int id, int step) {
+            this.id = id;
             this.step = step;
+            this.thread = new Thread(this::run, "Worker-" + id);
         }
 
-        @Override
-        public void run() {
+        private void run() {
             long value = 0;
             while (running) {
                 sum += value;
                 value += step;
                 count++;
             }
-            System.out.printf(
-                "Thread %d finished: sum = %d, elements count = %d%n",
-                id, sum, count
-            );
+            System.out.println("Thread " + id + " finished: sum = " + sum + ", elements count = " + count);
         }
 
-        public void stopThread() {
+        public void start() { thread.start(); }
+
+        public void stop() throws InterruptedException {
             running = false;
         }
     }
 
     public static void main(String[] args) throws InterruptedException {
-
-        WorkerThread[] threads = new WorkerThread[NUM_THREADS];
+        WorkerThread[] workers = new WorkerThread[NUM_THREADS];
+        Map<Integer, Integer> order = new HashMap<>(); // worker index -> duration
+        Random random = new Random();
 
         for (int i = 0; i < NUM_THREADS; i++) {
-            threads[i] = new WorkerThread(i + 1, STEP_BASE * (i + 1));
-            threads[i].start();
-            System.out.printf("Thread %d launched (step = %d)%n",
-                              i + 1, STEP_BASE * (i + 1));
+            workers[i] = new WorkerThread(i + 1, STEP_BASE * (i + 1));
+            workers[i].start();
+
+            int duration = random.nextInt(9000) + 1000;
+            order.put(i, duration);
+            System.out.println("Thread " + (i + 1) + " launched (step = " + (STEP_BASE * (i + 1)) + ", duration = " + duration + "ms)");
         }
 
+        List<Map.Entry<Integer, Integer>> sorted = new ArrayList<>(order.entrySet());
+        sorted.sort(Map.Entry.comparingByValue());
+
+        WorkerThread[] finalWorkers = workers;
         Thread controller = new Thread(() -> {
-            for (int i = 0; i < NUM_THREADS; i++) {
-                try {
-                    Thread.sleep(TIME_MS);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    break;
+            int elapsed = 0;
+            try {
+                for (Map.Entry<Integer, Integer> entry : sorted) {
+                    Thread.sleep(entry.getValue() - elapsed);
+                    elapsed = entry.getValue();
+                    finalWorkers[entry.getKey()].stop();
                 }
-                threads[i].stopThread();
-                try {
-                    threads[i].join();
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    break;
-                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
             }
-            System.out.println("All threads are finished.");
         });
+
         controller.setName("Controller");
         controller.start();
-
-        // Main thread simply waits for the controller to complete
-        controller.join();
     }
 }

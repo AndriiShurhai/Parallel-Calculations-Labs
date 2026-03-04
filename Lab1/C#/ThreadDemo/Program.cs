@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 class Program
 {
     const int NUM_THREADS = 10;
     const int STEP_BASE = 5;
-    const int TIME_MS = 1000;
 
     class WorkerThread
     {
@@ -21,7 +22,7 @@ class Program
             Id = id;
             this.step = step;
             Thread = new Thread(Run);
-            Thread.Name = $"Worker--{id}";
+            Thread.Name = $"Worker-{id}";
         }
 
         private void Run()
@@ -41,33 +42,40 @@ class Program
         public void Stop()
         {
             running = false;
-            Thread.Join();
         }
     }
 
     public static void Main(string[] args)
     {
         var workers = new WorkerThread[NUM_THREADS];
+        var order = new Dictionary<int, int>(); // worker index -> duration
+        var random = new Random();
 
         for (int i = 0; i < NUM_THREADS; i++)
         {
             workers[i] = new WorkerThread(i + 1, STEP_BASE * (i + 1));
             workers[i].Start();
-            Console.WriteLine($"Thread {i + 1} launched (step = {STEP_BASE * (i + 1)})");
+
+            int duration = random.Next(5000, 20000);
+            order[i] = duration;
+            Console.WriteLine($"Thread {i + 1} launched (step = {STEP_BASE * (i + 1)}, duration = {duration}ms)");
         }
+
+        var sorted = order.OrderBy(x => x.Value).ToList();
 
         Thread controller = new Thread(() =>
         {
-            for (int i = 0; i < NUM_THREADS; i++)
+            int elapsed = 0;
+            foreach (var entry in sorted)
             {
-                Thread.Sleep(TIME_MS);
-                workers[i].Stop();
+                Thread.Sleep(entry.Value - elapsed);
+                elapsed = entry.Value;
+                workers[entry.Key].Stop();
             }
             Console.WriteLine("All threads are finished");
         });
+
         controller.Name = "Controller";
         controller.Start();
-
-        controller.Join();
     }
 }
