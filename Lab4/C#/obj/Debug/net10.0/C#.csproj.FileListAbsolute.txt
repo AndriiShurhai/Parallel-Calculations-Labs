@@ -1,0 +1,15 @@
+F:\University\Third_course\Parrallel whatever\Lab4\C#\bin\Debug\net10.0\C#.exe
+F:\University\Third_course\Parrallel whatever\Lab4\C#\bin\Debug\net10.0\C#.deps.json
+F:\University\Third_course\Parrallel whatever\Lab4\C#\bin\Debug\net10.0\C#.runtimeconfig.json
+F:\University\Third_course\Parrallel whatever\Lab4\C#\bin\Debug\net10.0\C#.dll
+F:\University\Third_course\Parrallel whatever\Lab4\C#\bin\Debug\net10.0\C#.pdb
+F:\University\Third_course\Parrallel whatever\Lab4\C#\obj\Debug\net10.0\C#.GeneratedMSBuildEditorConfig.editorconfig
+F:\University\Third_course\Parrallel whatever\Lab4\C#\obj\Debug\net10.0\C#.AssemblyInfoInputs.cache
+F:\University\Third_course\Parrallel whatever\Lab4\C#\obj\Debug\net10.0\C#.AssemblyInfo.cs
+F:\University\Third_course\Parrallel whatever\Lab4\C#\obj\Debug\net10.0\C#.csproj.CoreCompileInputs.cache
+F:\University\Third_course\Parrallel whatever\Lab4\C#\obj\Debug\net10.0\C#.sourcelink.json
+F:\University\Third_course\Parrallel whatever\Lab4\C#\obj\Debug\net10.0\C#.dll
+F:\University\Third_course\Parrallel whatever\Lab4\C#\obj\Debug\net10.0\refint\C#.dll
+F:\University\Third_course\Parrallel whatever\Lab4\C#\obj\Debug\net10.0\C#.pdb
+F:\University\Third_course\Parrallel whatever\Lab4\C#\obj\Debug\net10.0\C#.genruntimeconfig.cache
+F:\University\Third_course\Parrallel whatever\Lab4\C#\obj\Debug\net10.0\ref\C#.dll
