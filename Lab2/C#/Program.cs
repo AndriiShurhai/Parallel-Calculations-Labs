@@ -13,6 +13,7 @@ namespace ThreadMinSharp
         private readonly Thread[] _threads = new Thread[ThreadCount];
 
         private long _globalMin = long.MaxValue;
+        private long _globalMinIndex = -1;
         private int _finishedThreads = 0;
 
         private readonly object _minLock = new();
@@ -24,18 +25,22 @@ namespace ThreadMinSharp
             program.InitArr();
 
             MeasureAndPrint("Sequential min", () => program.PartMin(0, Dim));
+            
+            program._globalMin = long.MaxValue; 
             MeasureAndPrint("Parallel min  ", () => program.ParallelMin());
 
+            Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
         }
 
-        private static void MeasureAndPrint(string label, Func<long> operation)
+        private static void MeasureAndPrint(string label, Func<(long Value, long Index)> operation)
         {
             var sw = Stopwatch.StartNew();
-            long result = operation();
+            var result = operation();
             sw.Stop();
-            Console.WriteLine($"{label}: {result}");
-            Console.WriteLine($"Result: {sw.ElapsedMilliseconds} milliseconds\n");
+            
+            Console.WriteLine($"{label}: {result.Value} at index: {result.Index}");
+            Console.WriteLine($"Elapsed: {sw.ElapsedMilliseconds} ms\n");
         }
 
         private void InitArr()
@@ -44,24 +49,28 @@ namespace ThreadMinSharp
             for (int i = 0; i < Dim; i++)
                 _arr[i] = rnd.Next(0, Dim);
 
-            _arr[0] = -1;
-            _arr[0] = -20;
+            _arr[500] = -20; 
         }
 
-        public long PartMin(int startIndex, int endIndex)
+        public (long Value, long Index) PartMin(int startIndex, int endIndex)
         {
             long localMin = long.MaxValue;
+            long localMinIndex = -1;
             for (int i = startIndex; i < endIndex; i++)
             {
                 if (_arr[i] < localMin)
+                {
                     localMin = _arr[i];
+                    localMinIndex = i;
+                }
             }
-            return localMin;
+            return (localMin, localMinIndex);
         }
 
-        private long ParallelMin()
+        private (long Value, long Index) ParallelMin()
         {
             int chunkSize = Dim / ThreadCount;
+            _finishedThreads = 0; // Reset counter
 
             for (int i = 0; i < ThreadCount; i++)
             {
@@ -78,19 +87,22 @@ namespace ThreadMinSharp
                     Monitor.Wait(_countLock);
             }
 
-            return _globalMin;
+            return (_globalMin, _globalMinIndex);
         }
 
-        private void ThreadWorker(object param)
+        private void ThreadWorker(object? param)
         {
             if (param is not Bounds bounds) return;
 
-            long localMin = PartMin(bounds.Start, bounds.End);
+            var result = PartMin(bounds.Start, bounds.End);
 
             lock (_minLock)
             {
-                if (localMin < _globalMin)
-                    _globalMin = localMin;
+                if (result.Value < _globalMin)
+                {
+                    _globalMin = result.Value;
+                    _globalMinIndex = result.Index;
+                }
             }
 
             lock (_countLock)

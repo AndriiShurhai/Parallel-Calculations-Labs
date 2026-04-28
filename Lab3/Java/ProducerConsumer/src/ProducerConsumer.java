@@ -43,10 +43,6 @@ public class ProducerConsumer {
             threads[PRODUCER_COUNT + i].start();
         }
 
-        for (Thread t : threads)
-            t.join();
-
-        System.out.println("\nAll done.");
     }
 
     private static void produce(int id, int count) {

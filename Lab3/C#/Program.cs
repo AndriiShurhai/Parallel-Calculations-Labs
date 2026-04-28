@@ -6,21 +6,17 @@ namespace ProducerConsumer
 {
     class Program
     {
-        // --- Config ---
         private const int StorageSize   = 3;
         private const int TotalItems    = 12;
         private const int ProducerCount = 3;
         private const int ConsumerCount = 2;
 
-        // --- Semaphores (matching reference naming) ---
         private Semaphore Access;  // mutual exclusion (binary)
         private Semaphore Full;    // free slots  (starts at StorageSize)
         private Semaphore Empty;   // filled slots (starts at 0)
 
-        // --- Shared storage ---
         private readonly List<string> storage = new List<string>();
 
-        // --- Shared item counter ---
         private int nextItem = 0;
         private readonly object counterLock = new object();
 
@@ -61,11 +57,6 @@ namespace ProducerConsumer
                 threads[ProducerCount + i].Name = $"Consumer {id}";
                 threads[ProducerCount + i].Start(share);
             }
-
-            foreach (var t in threads)
-                t.Join();
-
-            Console.WriteLine("\nAll done.");
         }
 
         private void Producer(object itemCount)

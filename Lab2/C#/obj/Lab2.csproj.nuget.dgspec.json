@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\University\\Third_course\\Parrallel whatever\\Lab2\\Lab2.csproj": {}
+    "F:\\University\\Third_course\\Parrallel whatever\\Lab2\\C#\\Lab2.csproj": {}
   },
   "projects": {
-    "F:\\University\\Third_course\\Parrallel whatever\\Lab2\\Lab2.csproj": {
+    "F:\\University\\Third_course\\Parrallel whatever\\Lab2\\C#\\Lab2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\University\\Third_course\\Parrallel whatever\\Lab2\\Lab2.csproj",
+        "projectUniqueName": "F:\\University\\Third_course\\Parrallel whatever\\Lab2\\C#\\Lab2.csproj",
         "projectName": "Lab2",
-        "projectPath": "F:\\University\\Third_course\\Parrallel whatever\\Lab2\\Lab2.csproj",
+        "projectPath": "F:\\University\\Third_course\\Parrallel whatever\\Lab2\\C#\\Lab2.csproj",
         "packagesPath": "C:\\Users\\it25102024\\.nuget\\packages\\",
-        "outputPath": "F:\\University\\Third_course\\Parrallel whatever\\Lab2\\obj\\",
+        "outputPath": "F:\\University\\Third_course\\Parrallel whatever\\Lab2\\C#\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\it25102024\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,7 +40,7 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.100"
+        "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
         "net10.0": {
@@ -61,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.104/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.202/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",

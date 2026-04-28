@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class ThreadMin {
 
-    private static final int DIM = 10_000_000;
+    private static final int DIM = 100_000_000;
     private static final int THREAD_COUNT = 3;
 
     private final int[] arr = new int[DIM];
